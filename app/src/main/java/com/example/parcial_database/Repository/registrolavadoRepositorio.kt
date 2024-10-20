@@ -4,23 +4,24 @@ import com.example.parcial_database.DAO.RegistrolavadoDAO
 import com.example.parcial_database.Model.RegistroLavado
 
 class registrolavadoRepositorio (private val registrolavadoDAO: RegistrolavadoDAO){
-    suspend fun insertarRegistro(registrolavado: RegistroLavado) {
-        return registrolavadoDAO.insertarRegistro(registrolavado)
+
+    suspend fun insertar(registrolavado: RegistroLavado) {
+        return registrolavadoDAO.insertar(registrolavado)
     }
 
-    suspend fun obtenerRegistro(): List<RegistroLavado> {
-        return registrolavadoDAO.obtenerRegistro()
+    suspend fun obtener(): List<RegistroLavado> {
+        return registrolavadoDAO.obtenerTodos()
     }
 
-    suspend fun obtenerRegistroPorId(id: Int): RegistroLavado {
-        return registrolavadoDAO.obtenerRegistroPorId(id)
+    suspend fun obtenerID(id: Int): RegistroLavado {
+        return registrolavadoDAO.obtenerID(id)
     }
 
-    suspend fun eliminarRegistro(id: Int): Int {
-        return registrolavadoDAO.eliminarRegistro(id)
+    suspend fun eliminar(id: Int): Int{
+        return registrolavadoDAO.eliminar(id)
     }
 
-    suspend fun actualizarRegistro(Id: Int, vehiculoId: Int, servicioId: Int, fechaLavado: String, horaInicio: String, horaFin: String, precioTotal: Double): Int {
-        return registrolavadoDAO.actualizarRegistro(Id, vehiculoId, servicioId, fechaLavado, horaInicio, horaFin, precioTotal)
+    suspend fun actualizar(registrolavado: RegistroLavado) {
+        return registrolavadoDAO.actualizar(registrolavado)
     }
 }

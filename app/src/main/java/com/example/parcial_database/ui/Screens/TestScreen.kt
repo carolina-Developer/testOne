@@ -12,17 +12,18 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.height
 import androidx.compose.material3.Button
-import com.example.parcial_database.Model.Vehiculo
+import androidx.lifecycle.viewmodel.compose.viewModel
 
 @Composable
 fun ClienteInputScreen(
-    viewModel: ClienteViewModel = androidx.lifecycle.viewmodel.compose.viewModel(),
+    viewModel: ClienteViewModel = viewModel(),
+    //viewModelVehiculo: VehiculoViewModel = viewModel(),
     onClienteSaved: () -> Unit // Este es el callback que se ejecuta al guardar
 ) {
+
     var nombre by remember { mutableStateOf("") }
     var apellido by remember { mutableStateOf("") }
     var telefono by remember { mutableStateOf("") }
@@ -35,10 +36,10 @@ fun ClienteInputScreen(
     var color by remember { mutableStateOf("") }
     var tipo by remember { mutableStateOf("") }
 
-    var clienteId by remember { mutableStateOf(0L) }
+    var clienteID : Int = 0
 
     Column(modifier = Modifier.padding(16.dp)) {
-        Text(text = "Agregar Cliente", style = MaterialTheme.typography.bodyMedium)
+        Text(text = "Agregar Cliente", style = MaterialTheme.typography.bodyLarge)
 
         // Campos de texto
         OutlinedTextField(
@@ -110,30 +111,35 @@ fun ClienteInputScreen(
         // Botón para guardar el cliente
         Button(
             onClick = {
-                clienteId =
-                     viewModel.insertCliente(
-                        Cliente(
-                            nombre = nombre,
-                            apellido = apellido,
-                            telefono = telefono,
-                            email = email,
-                            direccion = direccion,
-                        )
+                viewModel.insertarCliente(
+                    Cliente(
+                        nombre = nombre,
+                        apellido = apellido,
+                        telefono = telefono,
+                        email = email,
+                        direccion = direccion
                     )
+                )
+                /*val nuevoCliente = Cliente(
+                    nombre = nombre, apellido = apellido,
+                    telefono = telefono, email = email, direccion = direccion
+                )
+                viewModelCliente.insertarCliente(nuevoCliente)
+                clienteID = nuevoCliente.clienteID
 
                 // Guardar el cliente en la base de datos
 
 
-                viewModel.insertarVehiculo(
+                viewModelVehiculo.insertarVehiculo(
                     Vehiculo(
+                        clienteID = clienteID,
                         marca = marca,
                         modelo = modelo,
                         placa = placa,
                         color = color,
-                        tipo = tipo,
-                        clienteId = Cliente.id
+                        tipo = tipo
                     )
-                )
+                )*/
 
                 // Limpiar los campos después de guardar
                 nombre = ""

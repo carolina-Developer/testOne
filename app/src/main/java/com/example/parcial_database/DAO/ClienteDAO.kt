@@ -1,36 +1,49 @@
 package com.example.parcial_database.DAO
 
+import androidx.lifecycle.LiveData
 import androidx.room.Dao
+import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import androidx.room.Transaction
+import androidx.room.Update
 import com.example.parcial_database.Model.Cliente
-import com.example.parcial_database.Model.ClienteVehiculos
+import com.example.parcial_database.Model.ClienteconVehiculos
+import com.example.parcial_database.Model.Vehiculo
+import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface ClienteDAO {
-    //Obtener lista de clientes
-    @Query("SELECT * FROM cliente")
-    fun obtenerClientes(): List<Cliente>
 
-    //Obtener cliente por id
-    @Query("SELECT * FROM cliente WHERE id = id")
-    suspend fun obtenerClienteId(id : Int): Cliente
+    @Query("SELECT * FROM clientes")
+    suspend fun obtenerTodos(): List<Cliente>
 
-    //Insertar cliente
+    @Query("SELECT * FROM Clientes WHERE clienteID = :id")
+    suspend fun obtenerID(id: Int): Cliente
+
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertarCliente(cliente:Cliente)
+    suspend fun insertar(cliente:Cliente)
 
-    //Eliminar cliente por id
-    @Query("DELETE FROM cliente WHERE id = id")
-    suspend fun eliminarCliente(id:Int): Int
+    @Query("DELETE FROM Clientes WHERE clienteID = :clienteID")
+    suspend fun eliminar(clienteID: Int): Int
 
-    //Actualizar cliente
-    @Query("UPDATE cliente SET nombre = :nombre, apellido = :apellido, telefono = :telefono, email = :email, direccion = :direccion WHERE id = id")
-    suspend fun actualizarCliente(Id:Int, nombre:String, apellido:String, telefono:String, email:String, direccion:String):Int
+    @Update
+    suspend fun actualizar(cliente: Cliente)
 
     @Transaction
-    @Query("SELECT * FROM cliente")
-    suspend fun obtenerClientesConServicios(): List<ClienteVehiculos>
+    @Query("SELECT * FROM Vehiculos WHERE clienteID = :clienteID")
+    suspend fun obtenerVehiculosCliente(clienteID: Int): List<Vehiculo>
+
+    @Transaction
+    @Query("SELECT * FROM clientes")
+    fun getAllClientesConVehiculos(): LiveData<List<ClienteconVehiculos>>
+
 }
+
+//Actualizar cliente
+/*@Query("UPDATE clientes SET nombre = :nombre, apellido = :apellido, telefono = :telefono, email = :email, direccion = :direccion WHERE id = :id")
+suspend fun actualizar(id: Int, nombre:String, apellido:String, telefono:String, email:String, direccion:String):Int*/
+
+/*@Query("DELETE FROM clientes WHERE clienteID = :id")
+    suspend fun eliminarID(id:Int): Int*/

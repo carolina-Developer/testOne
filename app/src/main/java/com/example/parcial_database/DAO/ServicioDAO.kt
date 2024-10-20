@@ -5,32 +5,30 @@ import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import androidx.room.Transaction
+import androidx.room.Update
 import com.example.parcial_database.Model.Servicio
-import com.example.parcial_database.Model.ServicioRegistros
 
 @Dao
 interface ServicioDAO {
-    //Obtener lista de servicios
-    @Query("SELECT * FROM servicio")
-    suspend fun obtenerServicio(): List<Servicio>
 
-    //Obtener servicio por id
-    @Query("SELECT * FROM servicio WHERE servicioId = servicioId")
-    suspend fun obtenerServicioPorId(servicioId: Int): Servicio
+    @Query("SELECT * FROM servicios")
+    suspend fun obtenerTodos(): List<Servicio>
 
-    //Insertar servicio
+
+    @Query("SELECT * FROM servicios WHERE servicioId = :servicioId")
+    suspend fun obtenerID(servicioId: Int): Servicio
+
+
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertarServicio(servicio: Servicio)
+    suspend fun insertar(servicio: Servicio)
 
-    //Eliminar servicio por id
-    @Query("DELETE FROM servicio WHERE servicioId = servicioId")
-    suspend fun eliminarServicio(servicioId: Int): Int
 
-    //Actualizar servicio
-    @Query("UPDATE servicio SET nombre = :nombre, precio = :precio WHERE servicioId = servicioId")
-    suspend fun actualizarServicio(servicioId: Int, nombre: String, precio: Double): Int
+    @Query("DELETE FROM servicios WHERE servicioId = :servicioId")
+    suspend fun eliminar(servicioId: Int): Int
 
-    @Transaction
-    @Query("SELECT * FROM servicio")
-    fun obtenerRegistrosconServicios(): List<ServicioRegistros>
+    @Update
+    suspend fun actualizar(servicio: Servicio)
+
 }
+/* @Query("UPDATE servicios SET nombre = :nombre, precio = :precio WHERE servicioId = :servicioId")
+    suspend fun actuali(servicioId: Int, nombre: String, precio: Double): Int*/

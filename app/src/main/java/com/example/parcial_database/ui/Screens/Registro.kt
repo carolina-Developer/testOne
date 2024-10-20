@@ -5,7 +5,6 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.text.BasicTextField
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
-import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
@@ -14,8 +13,8 @@ import com.example.parcial_database.Model.Vehiculo
 import com.example.parcial_database.ui.viewModels.VehiculoViewModel
 
 
-@Composable
-fun ClienteScreen(viewModel: ClienteViewModel = viewModel(), viewModell: VehiculoViewModel = viewModel()) {
+/*@Composable
+fun ClienteInputScreens(viewModel: ClienteViewModel = viewModel(), viewModell: VehiculoViewModel = viewModel()) {
 
     val clientes by viewModel.clientes.observeAsState(emptyList())
     var clienteID : Int = 0
@@ -82,7 +81,7 @@ fun ClienteScreen(viewModel: ClienteViewModel = viewModel(), viewModell: Vehicul
         clientes.forEach { cliente ->
             Text("${cliente.nombre} ${cliente.apellido} - ${cliente.telefono}")
             Row {
-                Button(onClick = { viewModel.eliminarCliente(cliente) }) {
+                Button(onClick = { viewModel.eliminarCliente(clienteID) }) {
                     Text("Eliminar")
                 }
             }
@@ -154,4 +153,4 @@ fun ClienteScreen(viewModel: ClienteViewModel = viewModel(), viewModell: Vehicul
             Text(text = "Guardar Vehículo")
         }
     }
-}
+}*/

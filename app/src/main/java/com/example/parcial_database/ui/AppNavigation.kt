@@ -4,16 +4,24 @@ import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import com.example.parcial_database.ui.Screens.ClienteScreen
-import com.example.parcial_database.ui.Screens.RegistroLavadoScreen
-import com.example.parcial_database.ui.Screens.VehiculoScreen
+import androidx.navigation.compose.rememberNavController
+import com.example.parcial_database.ui.Screens.A
 
 @Composable
-fun AppNavigation(navController: NavHostController) {
+fun AppNavigation() {
+    val navController = rememberNavController()
+
     NavHost(navController = navController, startDestination = "clientes") {
-        composable("clientes") { ClienteScreen() }
-        composable("vehiculos") { VehiculoScreen() }
-        /*composable("servicios") { ServicioScreen() }*/
-        composable("registros_lavado") { RegistroLavadoScreen() }
+        composable("clientes") {
+            ClienteInputScreen(
+                onClienteSaved = {
+                    navController.navigate("clienteList")
+                }
+            )
+        }
+        composable("clienteList") {
+            A()
+        }
     }
 }
+/**/

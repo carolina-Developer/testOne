@@ -5,24 +5,24 @@ import com.example.parcial_database.Model.Vehiculo
 
 class vehiculoRepositorio(private val vehiculoDao: VehiculoDAO){
 
-    suspend fun insertarVehiculo(vehiculo: Vehiculo){
-        return vehiculoDao.insertarVehiculo(vehiculo)
+    suspend fun insertar(vehiculo: Vehiculo){
+        return vehiculoDao.insertar(vehiculo)
     }
 
-    suspend fun obtenerVehiculos():List<Vehiculo>{
-        return vehiculoDao.obtenerVehiculos()
+    suspend fun obtener():List<Vehiculo>{
+        return vehiculoDao.obtenerTodos()
     }
 
-    suspend fun obtenerVehiculoId(vehiculoId: Int): Vehiculo?{
-        return vehiculoDao.obtenerVehiculoId(vehiculoId)
+    suspend fun obtenerID(vehiculoId: Int): Vehiculo?{
+        return vehiculoDao.obtenerID(vehiculoId)
     }
 
-    suspend fun eliminarVehiculo(vehiculoId: Int): Int{
-        return vehiculoDao.eliminarVehiculo(vehiculoId)
+    suspend fun eliminar(id : Int): Int{
+        return vehiculoDao.eliminar(id)
     }
 
-    suspend fun actualizarVehiculo(vehiculoId: Int, marca: String, modelo: String, placa:String, color:String): Int{
-        return vehiculoDao.actualizarVehiculo(vehiculoId, marca, modelo, placa, color)
+    suspend fun actualizar(vehiculo : Vehiculo){
+        return vehiculoDao.actualizar(vehiculo)
     }
 
 }
