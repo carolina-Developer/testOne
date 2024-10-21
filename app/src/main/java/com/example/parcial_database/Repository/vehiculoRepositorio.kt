@@ -5,7 +5,7 @@ import com.example.parcial_database.Model.Vehiculo
 
 class vehiculoRepositorio(private val vehiculoDao: VehiculoDAO){
 
-    suspend fun insertar(vehiculo: Vehiculo){
+    suspend fun insertar(vehiculo: Vehiculo): Long{
         return vehiculoDao.insertar(vehiculo)
     }
 

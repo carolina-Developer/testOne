@@ -23,7 +23,7 @@ interface ClienteDAO {
     suspend fun obtenerID(id: Int): Cliente
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertar(cliente:Cliente)
+    suspend fun insertar(cliente:Cliente) : Long
 
     @Query("DELETE FROM Clientes WHERE clienteID = :clienteID")
     suspend fun eliminar(clienteID: Int): Int

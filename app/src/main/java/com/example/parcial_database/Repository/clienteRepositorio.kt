@@ -6,7 +6,7 @@ import com.example.parcial_database.Model.RegistroLavado
 
 class clienteRepositorio(private val clienteDAO: ClienteDAO) {
 
-    suspend fun insertar(cliente: Cliente) {
+    suspend fun insertar(cliente: Cliente): Long {
         return clienteDAO.insertar(cliente)
     }
 
